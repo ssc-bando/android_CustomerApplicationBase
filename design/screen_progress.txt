@@ -1,0 +1,28 @@
+@startuml
+
+note "navigationは2つ作った方がよさそうな気がする" as DummyNameForIndependentNote
+
+Startup : ボタンを作って仕様をシミュレート
+Startup : [自動ログイン成功][手動ログイン]
+
+[*] --> Startup
+
+Startup -down-> MainNavigation : 自動ログイン成功(ポップアップ後)
+Startup -down-> LoginNavigation : 手動ログイン
+
+state MainNavigation {
+  [*] --> 会員証画面
+  会員証画面 --> メニュー出したり
+  会員証画面 --> チラシ
+}
+
+state LoginNavigation {
+  [*] --> ユーザ名入力
+  ユーザ名入力 -down-> MainNavigation : ログイン成功ボタン
+  ユーザ名入力 -down-> ユーザ名入力 : ログイン失敗ボタン
+  ユーザ名入力 -down-> 許諾表示 : 新規登録ボタン
+  許諾表示 -> 登録画面
+  登録画面 -> MainNavigation : 登録ボタン
+}
+
+@enduml
