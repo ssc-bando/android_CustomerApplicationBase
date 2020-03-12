@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_selectLoginMethodFragment_to_showPermissionFragment"
             app:destination="@id/showPermissionFragment" />
+        <action
+            android:id="@+id/action_selectLoginMethodFragment_to_mobile_navigation"
+            app:destination="@id/mobile_navigation" />
     </fragment>
     <fragment
         android:id="@+id/showPermissionFragment"
@@ -27,5 +30,10 @@
         android:id="@+id/registerNewUserFragment"
         android:name="com.example.customerapplicationbase.RegisterNewUserFragment"
         android:label="fragment_register_new_user"
-        tools:layout="@layout/fragment_register_new_user" />
+        tools:layout="@layout/fragment_register_new_user" >
+        <action
+            android:id="@+id/action_registerNewUserFragment_to_mobile_navigation"
+            app:destination="@id/mobile_navigation" />
+    </fragment>
+    <include app:graph="@navigation/mobile_navigation" />
 </navigation>

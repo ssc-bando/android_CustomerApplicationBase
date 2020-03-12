@@ -1,12 +1,19 @@
 package com.example.customerapplicationbase;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 /**
@@ -23,6 +30,8 @@ public class SelectLoginMethodFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private Activity mParent;
 
     public SelectLoginMethodFragment() {
         // Required empty public constructor
@@ -60,5 +69,31 @@ public class SelectLoginMethodFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_select_login_method, container, false);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mParent = activity;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        Button b;
+        // Navigationで別のActivityを起動するのは無理ぽい(単にFragmentが切り替わるだけ)
+        //b = view.findViewById(R.id.button3);
+        //b.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_selectLoginMethodFragment_to_mobile_navigation));
+
+        b = view.findViewById(R.id.button3);
+        b.setOnClickListener(new View.OnClickListener() {
+                                 @Override
+                                 public void onClick(View v) {
+                                     Intent intent = new Intent(mParent, MainActivity.class);
+                                     mParent.startActivity(intent);
+                                 }
+                             });
+
+        b = view.findViewById(R.id.button4);
+        b.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_selectLoginMethodFragment_to_showPermissionFragment));
     }
 }

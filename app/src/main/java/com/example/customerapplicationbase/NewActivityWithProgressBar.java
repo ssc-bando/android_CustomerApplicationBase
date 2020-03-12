@@ -17,13 +17,12 @@ class NewActivityWithProgressBar extends AsyncTask<Void, Void, Void> {
     AlphaAnimation inAnimation;
     AlphaAnimation outAnimation;
 
-
-
     public NewActivityWithProgressBar(View basis, Context packageContext, Class<?> cls){
         baseView = basis;
         from = packageContext;
         to = cls;
     }
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
