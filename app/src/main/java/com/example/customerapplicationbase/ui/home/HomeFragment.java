@@ -1,9 +1,11 @@
 package com.example.customerapplicationbase.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,6 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.customerapplicationbase.R;
 
@@ -28,6 +32,17 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
+            }
+        });
+        final Button b = root.findViewById(R.id.button7);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController nv = NavHostFragment.findNavController(HomeFragment.this);
+                //boolean ret = nv.popBackStack();
+                boolean ret = nv.navigateUp();
+                Log.v("TAG", "click. nv is " + nv + ", ret is " + ret);
+
             }
         });
         return root;

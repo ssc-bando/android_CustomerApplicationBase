@@ -1,6 +1,7 @@
 package com.example.customerapplicationbase;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 
@@ -38,11 +39,18 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
+        //mAppBarConfiguration = new AppBarConfiguration.Builder(
+        //        R.id.nav_gallery, R.id.nav_gallery, R.id.nav_slideshow)
+        //        .setDrawerLayout(drawer)
+        //        .build();
+
+        // getGraph()で取得したインスタンスを指定しないと"トップレベル"と扱われない
+        // (遷移してきた瞬間に戻るボタン状態になってしまっている)
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                navController.getGraph())
                 .setDrawerLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
     }

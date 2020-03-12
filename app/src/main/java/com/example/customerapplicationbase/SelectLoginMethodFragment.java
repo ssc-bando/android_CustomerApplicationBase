@@ -1,12 +1,14 @@
 package com.example.customerapplicationbase;
 
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDeepLinkBuilder;
 import androidx.navigation.Navigation;
 
 import android.util.Log;
@@ -88,8 +90,12 @@ public class SelectLoginMethodFragment extends Fragment {
         b.setOnClickListener(new View.OnClickListener() {
                                  @Override
                                  public void onClick(View v) {
-                                     Intent intent = new Intent(mParent, MainActivity.class);
-                                     mParent.startActivity(intent);
+                                     //Intent intent = new Intent(mParent, MainActivity.class);
+                                     //mParent.startActivity(intent);
+                                     NavDeepLinkBuilder builder = new NavDeepLinkBuilder(mParent.getApplicationContext());
+                                     builder.setGraph(R.navigation.mobile_navigation);
+                                     builder.setDestination(R.id.drawer_layout);
+                                     PendingIntent intent = builder.createPendingIntent();
                                  }
                              });
 
