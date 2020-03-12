@@ -9,6 +9,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -44,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
         //        .setDrawerLayout(drawer)
         //        .build();
 
-        // getGraph()で取得したインスタンスを指定しないと"トップレベル"と扱われない
+        // getGraph()で取得したインスタンスを指定しないと"トップレベル"と扱われない(?)
         // (遷移してきた瞬間に戻るボタン状態になってしまっている)
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        final NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 navController.getGraph())
                 .setDrawerLayout(drawer)

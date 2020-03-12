@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -34,17 +35,17 @@ public class HomeFragment extends Fragment {
                 textView.setText(s);
             }
         });
-        final Button b = root.findViewById(R.id.button7);
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavController nv = NavHostFragment.findNavController(HomeFragment.this);
-                //boolean ret = nv.popBackStack();
-                boolean ret = nv.navigateUp();
-                Log.v("TAG", "click. nv is " + nv + ", ret is " + ret);
 
-            }
-        });
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(),
+                new OnBackPressedCallback(true) {
+                    @Override
+                    public void handleOnBackPressed() {
+                        Log.v("TAG", "back");
+                        // ログイン画面にまで戻ってしまう。
+                        // ignoreすれば戻るボタン自体を無視できるけど、、、
+                        //navController.popBackStack(R.id.login_fragment, false);
+                    }
+                });
         return root;
     }
 }
