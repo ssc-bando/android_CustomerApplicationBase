@@ -90,12 +90,8 @@ public class SelectLoginMethodFragment extends Fragment {
         b.setOnClickListener(new View.OnClickListener() {
                                  @Override
                                  public void onClick(View v) {
-                                     //Intent intent = new Intent(mParent, MainActivity.class);
-                                     //mParent.startActivity(intent);
-                                     NavDeepLinkBuilder builder = new NavDeepLinkBuilder(mParent.getApplicationContext());
-                                     builder.setGraph(R.navigation.mobile_navigation);
-                                     builder.setDestination(R.id.drawer_layout);
-                                     PendingIntent intent = builder.createPendingIntent();
+                                     Intent intent = new Intent(mParent, MainActivity.class);
+                                     mParent.startActivity(intent);
                                  }
                              });
 
