@@ -2,6 +2,7 @@ package com.example.customerapplicationbase;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 
@@ -10,7 +11,10 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
@@ -40,18 +44,12 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        //mAppBarConfiguration = new AppBarConfiguration.Builder(
-        //        R.id.nav_gallery, R.id.nav_gallery, R.id.nav_slideshow)
-        //        .setDrawerLayout(drawer)
-        //        .build();
-
-        // getGraph()で取得したインスタンスを指定しないと"トップレベル"と扱われない(?)
-        // (遷移してきた瞬間に戻るボタン状態になってしまっている)
-        final NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                navController.getGraph())
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_flyer)
                 .setDrawerLayout(drawer)
                 .build();
+
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
     }
