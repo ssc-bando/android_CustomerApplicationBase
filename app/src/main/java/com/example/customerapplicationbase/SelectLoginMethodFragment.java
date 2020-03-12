@@ -33,8 +33,6 @@ public class SelectLoginMethodFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private Activity mParent;
-
     public SelectLoginMethodFragment() {
         // Required empty public constructor
     }
@@ -74,12 +72,6 @@ public class SelectLoginMethodFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        mParent = activity;
-    }
-
-    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         Button b;
         // Navigationで別のActivityを起動するのは無理ぽい(単にFragmentが切り替わるだけ)
@@ -90,8 +82,9 @@ public class SelectLoginMethodFragment extends Fragment {
         b.setOnClickListener(new View.OnClickListener() {
                                  @Override
                                  public void onClick(View v) {
-                                     Intent intent = new Intent(mParent, MainActivity.class);
-                                     mParent.startActivity(intent);
+                                     Activity parent = requireActivity();
+                                     Intent intent = new Intent(parent, MainActivity.class);
+                                     parent.startActivity(intent);
                                  }
                              });
 
